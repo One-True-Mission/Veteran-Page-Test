@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Veteran Support</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
   <!-- Fixed background layer -->
-  <div class="bg" role="img" aria-label="American flag at sunset with message: Stand tall, Veteran — you are not alone."></div>
+  <div class="bg" role="img" aria-label="American flag at sunset."></div>
   <div class="shade" aria-hidden="true"></div>
 
-  <!-- Off-canvas menu trigger -->
-  <header class="topbar">
+  <!-- Header bar + menu trigger -->
+  <header class="topbar theme-bar">
     <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">☰</button>
+    <div class="brand">
+      <span class="star" aria-hidden="true">★</span>
+      <span class="brand-text">Veteran Support</span>
+    </div>
     <h1 class="sr-only">Veteran Support</h1>
   </header>
 
@@ -21,14 +25,19 @@
   <aside id="sidemenu" class="sidemenu" aria-hidden="true">
     <div class="menu-inner">
       <div class="menu-header">
-        <div class="support-text">Click here to help support</div>
+        <a
+          class="support-link"
+          href="https://1x2f63-7u.myshopify.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Click here to help support</a>
       </div>
 
       <nav class="menu-links" aria-label="Primary">
-        <a href="#" class="menu-link">Home</a>
+        <a href="index.html" class="menu-link" aria-current="page">Home</a>
         <a href="#" class="menu-link">Resources</a>
         <a href="#" class="menu-link">Testimonials</a>
-        <a href="#" class="menu-link">About</a>
+        <a href="about.html" class="menu-link">About</a>
       </nav>
 
       <div class="menu-footer">
@@ -43,10 +52,8 @@
   <div class="backdrop" hidden></div>
 
   <main class="content">
-    <!-- Hero message (kept visible as overlay in case user's image text is obscured) -->
-    <section class="hero-callout" aria-live="polite">
-      <p class="hero-text">Stand tall, Veteran — you are not alone.</p>
-    </section>
+    <!-- Spacer so the flag + message are fully visible first -->
+    <section class="hero-spacer" aria-hidden="true"></section>
 
     <!-- Crisis buttons -->
     <section class="cta">
@@ -56,7 +63,7 @@
 
     <!-- Video placeholder section -->
     <section class="videos">
-      <h2>Veteran Stories & Civilian Life Guides</h2>
+      <h2>Veteran Stories &amp; Civilian Life Guides</h2>
       <p class="muted">Real videos will go here. For now, this is a placeholder.</p>
       <div class="video-grid">
         <div class="video-card">
