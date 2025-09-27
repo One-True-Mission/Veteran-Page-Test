@@ -1,43 +1,73 @@
-// Menu toggle
-const menu = document.getElementById('sidemenu');
-const hamburger = document.querySelector('.hamburger');
-const backdrop = document.querySelector('.backdrop');
+// app.js — drop-in
+(() => {
+  const menu = document.getElementById('sidemenu');
+  const hamburger = document.querySelector('.hamburger');
+  const backdrop = document.querySelector('.backdrop');
+  const root = document.documentElement;
+  const year = document.getElementById('year');
+  const range = document.getElementById('brightnessRange');
 
-function setExpanded(isOpen){
-  hamburger.setAttribute('aria-expanded', String(isOpen));
-  menu.setAttribute('aria-hidden', String(!isOpen));
-  backdrop.hidden = !isOpen;
-}
+  // Footer year
+  if (year) year.textContent = new Date().getFullYear();
 
-hamburger.addEventListener('click', () => {
-  const isOpen = !menu.classList.contains('open');
-  menu.classList.toggle('open', isOpen);
-  setExpanded(isOpen);
-});
+  // ----- Off-canvas menu -----
+  const setExpanded = (isOpen) => {
+    if (hamburger) hamburger.setAttribute('aria-expanded', String(isOpen));
+    if (menu) menu.setAttribute('aria-hidden', String(!isOpen));
+    if (backdrop) backdrop.hidden = !isOpen;
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  };
+  const open = () => { menu?.classList.add('open'); setExpanded(true); };
+  const close = () => { menu?.classList.remove('open'); setExpanded(false); };
 
-backdrop.addEventListener('click', () => {
-  menu.classList.remove('open');
-  setExpanded(false);
-});
+  hamburger?.addEventListener('click', () => (
+    menu?.classList.contains('open') ? close() : open()
+  ));
+  backdrop?.addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  document.querySelectorAll('.menu-link').forEach(a => a.addEventListener('click', close));
 
-// Brightness slider
-const range = document.getElementById('brightnessRange');
-const root = document.documentElement;
-const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+  // ----- Brightness slider (persists) -----
+  if (range) {
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+    const applyFromPct = (pctStr) => {
+      const pct = clamp(parseInt(pctStr, 10), 50, 110);
+      root.style.setProperty('--bg-brightness', String(pct / 100));
+    };
 
-function applyBrightness(){
-  const val = clamp(parseInt(range.value, 10), 50, 110) / 100;
-  root.style.setProperty('--bg-brightness', String(val));
-  // Persist between sessions
-  try { localStorage.setItem('bg_brightness', String(val)); } catch(e){}
-}
-range.addEventListener('input', applyBrightness);
+    // Backwards-compatible with your previous "bg_brightness" float key
+    const savedPct = localStorage.getItem('bg_brightness_pct');
+    const savedFloat = localStorage.getItem('bg_brightness');
+    if (savedPct) {
+      range.value = savedPct;
+    } else if (savedFloat) {
+      range.value = String(Math.round(parseFloat(savedFloat) * 100));
+    }
 
-// Restore previous brightness
-try {
-  const saved = localStorage.getItem('bg_brightness');
-  if(saved){ root.style.setProperty('--bg-brightness', saved); range.value = Math.round(parseFloat(saved)*100); }
-} catch(e){}
+    // Apply once on load (or use default value if nothing saved)
+    applyFromPct(range.value || '80');
 
-// Footer year
-document.getElementById('year').textContent = new Date().getFullYear();
+    range.addEventListener('input', (e) => {
+      const val = e.target.value;
+      localStorage.setItem('bg_brightness_pct', val);
+      applyFromPct(val);
+    });
+  }
+
+  // ----- iOS anti-zoom shim for the fixed background -----
+  // Keeps .bg crisp during momentum scroll
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const bg = document.querySelector('.bg');
+      if (bg) {
+        bg.style.willChange = 'transform';
+        bg.style.transform = 'translateZ(0)'; // re-raster hint
+        setTimeout(() => { bg.style.willChange = 'auto'; }, 120);
+      }
+      ticking = false;
+    });
+  }, { passive: true });
+})();
