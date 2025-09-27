@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About • Veteran Support</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <!-- Fixed background layer -->
+  <div class="bg" role="img" aria-label="American flag at sunset."></div>
+  <div class="shade" aria-hidden="true"></div>
+
+  <!-- Header bar + menu trigger -->
+  <header class="topbar theme-bar">
+    <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">☰</button>
+    <div class="brand">
+      <span class="star" aria-hidden="true">★</span>
+      <span class="brand-text">Veteran Support</span>
+    </div>
+    <h1 class="sr-only">About • Veteran Support</h1>
+  </header>
+
+  <!-- Off-canvas menu -->
+  <aside id="sidemenu" class="sidemenu" aria-hidden="true">
+    <div class="menu-inner">
+      <div class="menu-header">
+        <a
+          class="support-link"
+          href="https://1x2f63-7u.myshopify.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Click here to help support</a>
+      </div>
+
+      <nav class="menu-links" aria-label="Primary">
+        <a href="index.html" class="menu-link">Home</a>
+        <a href="#" class="menu-link">Resources</a>
+        <a href="#" class="menu-link">Testimonials</a>
+        <a href="about.html" class="menu-link" aria-current="page">About</a>
+      </nav>
+
+      <div class="menu-footer">
+        <h2 class="settings-title">Settings</h2>
+        <label class="slider-label" for="brightnessRange">Background Brightness</label>
+        <input id="brightnessRange" type="range" min="50" max="110" value="80" />
+      </div>
+    </div>
+  </aside>
+
+  <!-- Slide-out backdrop -->
+  <div class="backdrop" hidden></div>
+
+  <main class="content">
+    <!-- Keep the hero visible first here too -->
+    <section class="hero-spacer" aria-hidden="true"></section>
+
+    <!-- About content card -->
+    <section class="videos">
+      <h2>About Veteran Support</h2>
+
+      <h3>Why We’re Here</h3>
+      <p>Life after service can be heavy. We built Veteran Support so no one carries it alone. We wanted a steady place for veterans to breathe, get connected, and move forward with confidence.</p>
+
+      <h3>What You’ll Find</h3>
+      <p><strong>Quick help:</strong> one-tap call or text to the Veterans Crisis Line.</p>
+      <p><strong>Real stories:</strong> testimonials and videos from Veterans navigating civilian life.</p>
+      <p><strong>Practical tools:</strong> links to trusted resources for mental health, benefits, career, and family support.</p>
+
+      <h3>How Giving Works</h3>
+      <p>We’re a for-profit brand that gives back. A portion of every purchase is donated to vetted nonprofits that support Veterans and their families. To keep it transparent, each product lists the exact percentage donated, and we publish periodic impact updates.</p>
+
+      <h3>Our Promise</h3>
+      <p>Respect. Privacy. Zero judgment. We’ll keep improving this space with your feedback and always prioritize clarity, accuracy, and compassion.</p>
+
+      <h3>If You’re in Crisis</h3>
+      <p>You’re not alone. Call <strong>988</strong> and press <strong>1</strong>, or text <strong>838255</strong> for the Veterans Crisis Line 24/7, confidential.</p>
+    </section>
+
+    <footer class="footer">
+      <small>&copy; <span id="year"></span> Veteran Support</small>
+    </footer>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
