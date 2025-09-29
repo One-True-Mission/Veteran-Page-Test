@@ -171,3 +171,5 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 */
 /* Nearly solid bubble for the home message */
 .videos--opaque { background: rgba(0,0,0,.9); } /* tweak to .85 or .95 to taste */
+
+.text-center { text-align: center; }
