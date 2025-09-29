@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Find Local Help — One True Mission</title>
+  <meta name="description" content="Find nearby VA facilities, Vet Centers, and State Veteran Service Offices by ZIP code." />
+  <link rel="stylesheet" href="css/haven.css">
+</head>
+<body>
+  <a class="sr-only" href="#main">Skip to content</a>
+
+  <header class="header">
+    <div class="wrap nav">
+      <div class="brand">One True Mission</div>
+      <nav class="menu" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="resources.html">Resources &amp; Testimonials</a>
+        <a href="find-local-help.html" aria-current="page">Find Local Help</a>
+        <a href="https://YOUR-SHOPIFY-COLLECTION-URL" rel="noopener">Click Me</a>
+      </nav>
+      <button class="quick-exit" id="quickExit" title="Quick Exit">Leave Site ⤴︎</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="section">
+      <div class="wrap">
+        <h1 class="h3">Find local help by ZIP code</h1>
+        <form id="zipForm" class="zip-form" onsubmit="return false;">
+          <label for="zip" class="sr-only">ZIP code</label>
+          <input id="zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" placeholder="e.g., 77494" required />
+          <button class="btn primary" id="go">Search</button>
+        </form>
+
+        <div class="cards three" style="margin-top:16px">
+          <article class="card">
+            <h3>VA Facilities</h3>
+            <p>Hospitals, clinics, benefits offices, and more.</p>
+            <p><a id="vaLocator" class="btn" href="https://www.va.gov/find-locations/" rel="noopener">Open VA Locator</a></p>
+          </article>
+          <article class="card">
+            <h3>Vet Centers</h3>
+            <p>Confidential counseling and readjustment support.</p>
+            <p><a id="vetCenters" class="btn" href="https://www.va.gov/find-locations/" rel="noopener">Find Vet Centers</a></p>
+          </article>
+          <article class="card">
+            <h3>State Veterans Office</h3>
+            <p>State VSOs can connect you to local benefits and services.</p>
+            <p><a class="btn" href="https://nasdva.us/resources/" rel="noopener">Find your state page</a></p>
+          </article>
+        </div>
+
+        <p class="fine" style="margin-top:12px">Tip: Dial <b>211</b> for local housing, food, and emergency help in most areas.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p class="fine">© <span id="year"></span> One True Mission</p>
+    </div>
+  </footer>
+
+  <script src="js/haven.js" defer></script>
+  <script>
+    // Prefill VA locator links with ZIP when possible
+    const zip = document.getElementById('zip');
+    const vaLocator = document.getElementById('vaLocator');
+    const vetCenters = document.getElementById('vetCenters');
+    document.getElementById('go').addEventListener('click', () => {
+      if (!zip.checkValidity()) { zip.reportValidity(); return; }
+      const z = encodeURIComponent(zip.value);
+      // VA Find Locations supports address query; Vet Centers use same tool with a filter
+      vaLocator.href = `https://www.va.gov/find-locations/?address=${z}`;
+      vetCenters.href = `https://www.va.gov/find-locations/?address=${z}&facilityType=vet_center`;
+      vaLocator.focus();
+    });
+  </script>
+</body>
+</html>
