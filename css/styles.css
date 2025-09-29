@@ -159,6 +159,12 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   :root{ --hero-spacer: 58vh; } /* a touch more space on desktop/tablet */
 }
 
+/* ---------- Utilities ---------- */
+.text-center { text-align: center; }
+
+/* Softer, more see-through bubble for the home message (~50% of .9) */
+.videos--soft { background: rgba(0,0,0,.45); }
+
 /* ----- Optional: About page background override -----
    If you want a different image on about.html, add class="about-page" to
    the <body> there and uncomment the block below.
@@ -169,7 +175,3 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   background-position: center;
 }
 */
-/* Nearly solid bubble for the home message */
-.videos--opaque { background: rgba(0,0,0,.9); } /* tweak to .85 or .95 to taste */
-
-.text-center { text-align: center; }
