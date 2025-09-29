@@ -1,73 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>About • Veteran Support</title>
-  <link rel="stylesheet" href="css/styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About – Veteran Support</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script defer src="js/app.js"></script>
 </head>
-<body>
-  <!-- Fixed background layer -->
-  <div class="bg" role="img" aria-label="American flag at sunset."></div>
-  <div class="shade" aria-hidden="true"></div>
+<body class="about-page">
+  <!-- Background -->
+  <div class="bg"></div>
+  <div class="shade"></div>
 
-  <!-- Header bar + menu trigger -->
+  <!-- Topbar -->
   <header class="topbar theme-bar">
-    <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">☰</button>
+    <button class="hamburger" aria-label="Open menu">☰</button>
     <div class="brand">
-      <span class="star" aria-hidden="true">★</span>
+      <span class="star">★</span>
       <span class="brand-text">Veteran Support</span>
     </div>
-    <h1 class="sr-only">About • Veteran Support</h1>
   </header>
 
-  <!-- Off-canvas menu -->
-  <aside id="sidemenu" class="sidemenu" aria-hidden="true">
+  <!-- Side menu -->
+  <nav class="sidemenu" id="sidemenu">
     <div class="menu-inner">
       <div class="menu-header">
-        <a
-          class="support-link"
-          href="https://1x2f63-7u.myshopify.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Click here to help support</a>
+        <a href="index.html" class="support-link">Get Support Now</a>
       </div>
-
-      <nav class="menu-links" aria-label="Primary">
+      <div class="menu-links">
         <a href="index.html" class="menu-link">Home</a>
+        <a href="about.html" class="menu-link">About</a>
         <a href="resources.html" class="menu-link">Resources &amp; Testimonials</a>
-        <a href="about.html" class="menu-link" aria-current="page">About</a>
-      </nav>
-
+        <a href="find-local-help.html" class="menu-link">Find Local Help</a>
+      </div>
       <div class="menu-footer">
-        <h2 class="settings-title">Settings</h2>
-        <label class="slider-label" for="brightnessRange">Background Brightness</label>
-        <input id="brightnessRange" type="range" min="50" max="110" value="80" />
+        <div class="settings-title">Adjust Background</div>
+        <label for="brightnessRange" class="slider-label">Brightness</label>
+        <input type="range" id="brightnessRange" min="50" max="110" value="80">
       </div>
     </div>
-  </aside>
+  </nav>
+  <div class="backdrop" id="backdrop" hidden></div>
 
-  <!-- Slide-out backdrop -->
-  <div class="backdrop" hidden></div>
+  <!-- Spacer to show full flag before bubble -->
+  <div class="hero-spacer"></div>
 
-<main class="content">
-  <section class="content-bubble">
-    <h1>Why This Mission Exists</h1>
-    <p>When service ends, the journey doesn’t. Veterans step into a new world, often without a clear map, carrying both visible and invisible battles. Too many feel forgotten, isolated, or unsure of where to turn.</p>
+  <!-- Main Content -->
+  <main class="content">
+    <section class="content-bubble">
+      <h1>Why This Mission Exists</h1>
+      <p>When service ends, the journey doesn’t. Veterans step into a new world, often without a clear map, carrying both visible and invisible battles. Too many feel forgotten, isolated, or unsure of where to turn.</p>
 
-    <p>This website exists to change that. It was created as a safe haven. A place where veterans can come for help, direction, and encouragement. It is about impacting lives. Every page, every resource, every link has been chosen to provide support in moments of need.</p>
+      <p>This website exists to change that. It was created as a safe haven. A place where veterans can come for help, direction, and encouragement. It is about impacting lives. Every page, every resource, every link has been chosen to provide support in moments of need.</p>
 
-    <p>We know that healing and growth look different for everyone. That’s why this site offers multiple avenues. From crisis support to guidance on civilian life. Veterans deserve choices, not demands.</p>
+      <p>We know that healing and growth look different for everyone. That’s why this site offers multiple avenues. From crisis support to guidance on civilian life. Veterans deserve choices, not demands.</p>
 
-    <p>Above all, this is a community that says: <strong>You are not forgotten. You are valued. And you are not alone.</strong></p>
-  </section>
-</main>
-
-    <footer class="footer">
-      <small>&copy; <span id="year"></span> Veteran Support</small>
-    </footer>
+      <p>Above all, this is a community that says: <strong>You are not forgotten. You are valued. And you are not alone.</strong></p>
+    </section>
   </main>
 
-  <script src="js/app.js"></script>
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; <span id="year"></span> Veteran Support</p>
+  </footer>
 </body>
 </html>
