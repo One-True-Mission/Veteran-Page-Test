@@ -175,3 +175,13 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   background-position: center;
 }
 */
+/* About page bubble */
+.content-bubble {
+  background: rgba(255, 255, 255, 0.85); /* 30% less see-through */
+  color: #000;                           /* darker text for readability */
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: left;
+  line-height: 1.6;
+}
