@@ -214,3 +214,87 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   font-weight: bold;
   box-shadow: var(--shadow);
 }
+/* --- Menu polish: support button, spacing, dropdown --- */
+.menu-header{
+  padding: 20px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  margin-bottom: 14px;              /* more space under the support button */
+}
+
+/* Make the support button inviting but not loud */
+.support-link{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .2px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,.25);
+  transition: transform .15s ease, background .15s ease;
+}
+.support-link:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
+.support-link:active{ transform: translateY(0); }
+
+/* small eyebrow + main line inside support button (optional) */
+.support-eyebrow{ font-size: 11px; text-transform: uppercase; letter-spacing:.12em; opacity:.9; display:block; }
+.support-main{ display:block; font-weight: 800; }
+
+/* Add a bit more breathing room between the three site links */
+.menu-links{ display: grid; gap: 14px; padding: 16px 20px; }
+
+/* Make buttons and links look consistent in the drawer */
+.menu-link,
+.menu-disclosure{
+  display: block;
+  width: 100%;
+  text-align: left;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,.06);
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+}
+.menu-link:active,
+.menu-disclosure:active{ transform: translateY(1px); }
+
+/* Disclosure caret */
+.menu-disclosure{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.menu-disclosure .chev{
+  transition: transform .15s ease;
+  opacity: .85;
+}
+.menu-disclosure[aria-expanded="true"] .chev{ transform: rotate(90deg); }
+
+/* Submenu styling */
+.submenu{
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+  margin-left: 6px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255,255,255,.10);
+}
+.submenu-link{
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,.04);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: .95em;
+}
+.submenu-link:active{ transform: translateY(1px); }
