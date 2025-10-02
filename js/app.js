@@ -71,3 +71,22 @@
     });
   }, { passive: true });
 })();
+// --- Resources dropdown (drawer submenu) ---
+(function () {
+  const disclosures = document.querySelectorAll('.menu-disclosure');
+  disclosures.forEach(btn => {
+    const targetId = btn.getAttribute('aria-controls');
+    const panel = document.getElementById(targetId);
+    if (!panel) return;
+
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if (expanded) {
+        panel.setAttribute('hidden', '');
+      } else {
+        panel.removeAttribute('hidden');
+      }
+    });
+  });
+})();
