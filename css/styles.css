@@ -202,3 +202,15 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 .content-bubble a {
   color: #fff; /* ensure all text elements stay white */
 }
+/* Emergency notice box */
+.emergency-box {
+  background-color: rgba(255, 140, 0, 0.9); /* strong orange shade */
+  color: #fff;
+  padding: 1rem;
+  margin: 1rem auto;
+  max-width: 700px;
+  text-align: center;
+  border-radius: var(--radius);
+  font-weight: bold;
+  box-shadow: var(--shadow);
+}
