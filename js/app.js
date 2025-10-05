@@ -7,6 +7,18 @@
   const year = document.getElementById('year');
   const range = document.getElementById('brightnessRange');
 
+  // --- Lock background to visual viewport height (fixes zoom/scroll jump) ---
+(function lockVisualViewportHeight(){
+  const setVH = () => {
+    const vh = (window.visualViewport?.height || window.innerHeight);
+    document.documentElement.style.setProperty('--vh', vh + 'px');
+  };
+  setVH();
+  window.addEventListener('resize', setVH, { passive: true });
+  window.visualViewport?.addEventListener('resize', setVH, { passive: true });
+  window.visualViewport?.addEventListener('scroll', setVH, { passive: true });
+})();
+
   // Footer year
   if (year) year.textContent = new Date().getFullYear();
 
