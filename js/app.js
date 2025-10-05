@@ -1,4 +1,4 @@
-// app.js — drop-in
+// app.js — drop-in (clean version for svh/dvh/lvh CSS)
 (() => {
   const menu = document.getElementById('sidemenu');
   const hamburger = document.querySelector('.hamburger');
@@ -6,18 +6,6 @@
   const root = document.documentElement;
   const year = document.getElementById('year');
   const range = document.getElementById('brightnessRange');
-
-  // --- Lock background to visual viewport height (fixes zoom/scroll jump) ---
-  (function lockVisualViewportHeight(){
-    const setVH = () => {
-      const vh = (window.visualViewport?.height || window.innerHeight);
-      document.documentElement.style.setProperty('--vh', vh + 'px');
-    };
-    setVH();
-    window.addEventListener('resize', setVH, { passive: true });
-    window.visualViewport?.addEventListener('resize', setVH, { passive: true });
-    window.visualViewport?.addEventListener('scroll', setVH, { passive: true });
-  })();
 
   // Footer year
   if (year) year.textContent = new Date().getFullYear();
@@ -37,7 +25,11 @@
   ));
   backdrop?.addEventListener('click', close);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-  document.querySelectorAll('.menu-link').forEach(a => a.addEventListener('click', close));
+
+  // Close drawer when tapping any primary link
+  document.querySelectorAll('.menu-link').forEach(a => {
+    a.addEventListener('click', close);
+  });
 
   // ----- Brightness slider (persists) -----
   if (range) {
@@ -66,26 +58,10 @@
     });
   }
 
-  // ----- iOS anti-zoom shim for the fixed background -----
-  // Keeps .bg crisp during momentum scroll (works alongside the --vh fix above)
-  let ticking = false;
-  window.addEventListener('scroll', () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const bg = document.querySelector('.bg');
-      if (bg) {
-        bg.style.willChange = 'transform';
-        bg.style.transform = 'translateZ(0)'; // re-raster hint
-        setTimeout(() => { bg.style.willChange = 'auto'; }, 120);
-      }
-      ticking = false;
-    });
-  }, { passive: true });
 })();
-
+  
 // --- Resources dropdown (drawer submenu) ---
-(function () {
+(() => {
   const disclosures = document.querySelectorAll('.menu-disclosure');
   disclosures.forEach(btn => {
     const targetId = btn.getAttribute('aria-controls');
