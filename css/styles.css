@@ -17,7 +17,8 @@
   --shadow: 0 10px 30px rgba(0,0,0,.35);
 
   /* how far down content starts beneath the hero background */
-  --hero-spacer: 52vh;       /* tweak to 48–60vh to taste */
+  /* CHANGED: use stable viewport units to prevent mobile zoom/jump */
+  --hero-spacer: 52svh;       /* fallback sequence continues in media query */
 }
 
 /* Base */
@@ -31,11 +32,19 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   position: fixed;
   inset: 0;
   width: 100vw;
-  height: var(--vh, 100vh);  /* JS-driven visual viewport lock */
+
+  /* CHANGED: lock the height against URL-bar show/hide behavior */
+  height: 100vh;   /* basic fallback */
+  height: 100svh;  /* small viewport height (no resize with toolbars) */
+  height: 100dvh;  /* dynamic viewport height */
+  height: 100lvh;  /* large viewport height */
+
   background: url('../assets/hero-flag.jpg') center / cover no-repeat;
   filter: brightness(var(--bg-brightness));
   z-index: -2;                 /* behind everything */
   transform: translateZ(0);    /* helps iOS keep it crisp */
+  will-change: transform;
+  contain: layout paint;       /* hints for better perf on some mobiles */
 }
 
 /* subtle overlay for readability */
@@ -43,7 +52,13 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   position: fixed;
   inset: 0;
   width: 100vw;
-  height: var(--vh, 100vh);    /* JS-driven visual viewport lock */
+
+  /* CHANGED: mirror .bg height locking */
+  height: 100vh;
+  height: 100svh;
+  height: 100dvh;
+  height: 100lvh;
+
   background: var(--shade);
   z-index: -1;
 }
@@ -114,6 +129,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 
 /* Content and hero spacer */
 .content{ max-width: var(--maxw); margin: 0 auto; padding: 24px var(--pad) 60px; }
+/* CHANGED: rely on the var we set to svh above (prevents jump/zoom feel) */
 .hero-spacer{ height: var(--hero-spacer); }
 
 /* Buttons */
@@ -146,7 +162,8 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 /* Larger screens */
 @media(min-width: 720px){
   .video-grid{ grid-template-columns: 1fr 1fr; }
-  :root{ --hero-spacer: 58vh; } /* a touch more space on desktop/tablet */
+  /* CHANGED: use svh/lvh to keep spacer stable on desktop/tablet, too */
+  :root{ --hero-spacer: 58svh; }
 }
 
 /* ---------- Utilities ---------- */
@@ -165,17 +182,21 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   background-position: center;
 }
 */
-/* About page bubble */
+
+/* About page bubble — (commented out the light version to avoid override) */
+/*
 .content-bubble {
-  background: rgba(255, 255, 255, 0.85); /* 30% less see-through */
-  color: #000;                           /* darker text for readability */
+  background: rgba(255, 255, 255, 0.85); 
+  color: #000;
   padding: 24px;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   text-align: left;
   line-height: 1.6;
 }
-/* About page bubble styled like homepage */
+*/
+
+/* About page bubble styled like homepage (active) */
 .content-bubble {
   background: rgba(0, 0, 0, 0.65); /* medium transparency black */
   color: #fff;                     /* white text inside */
@@ -192,6 +213,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 .content-bubble a {
   color: #fff; /* ensure all text elements stay white */
 }
+
 /* Emergency notice box */
 .emergency-box {
   background-color: rgba(255, 140, 0, 0.9); /* strong orange shade */
@@ -204,6 +226,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   font-weight: bold;
   box-shadow: var(--shadow);
 }
+
 /* --- Menu polish: support button, spacing, dropdown --- */
 .menu-header{
   padding: 20px;
