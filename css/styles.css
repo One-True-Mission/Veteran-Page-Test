@@ -33,13 +33,18 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   inset: 0;
   width: 100vw;
 
-  /* CHANGED: lock the height against URL-bar show/hide behavior */
+  /* lock the height against URL-bar show/hide behavior */
   height: 100vh;   /* basic fallback */
   height: 100svh;  /* small viewport height (no resize with toolbars) */
   height: 100dvh;  /* dynamic viewport height */
   height: 100lvh;  /* large viewport height */
 
-  background: url('../assets/hero-flag.jpg') center / cover no-repeat;
+  /* CHANGED: split background props + variable X focus so Chrome iOS can nudge */
+  background-image: url('../assets/hero-flag.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: var(--bgx, center) 50%;
+
   filter: brightness(var(--bg-brightness));
   z-index: -2;                 /* behind everything */
   transform: translateZ(0);    /* helps iOS keep it crisp */
@@ -53,7 +58,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   inset: 0;
   width: 100vw;
 
-  /* CHANGED: mirror .bg height locking */
+  /* mirror .bg height locking */
   height: 100vh;
   height: 100svh;
   height: 100dvh;
@@ -129,7 +134,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 
 /* Content and hero spacer */
 .content{ max-width: var(--maxw); margin: 0 auto; padding: 24px var(--pad) 60px; }
-/* CHANGED: rely on the var we set to svh above (prevents jump/zoom feel) */
+/* rely on the var we set to svh above (prevents jump/zoom feel) */
 .hero-spacer{ height: var(--hero-spacer); }
 
 /* Buttons */
@@ -162,7 +167,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 /* Larger screens */
 @media(min-width: 720px){
   .video-grid{ grid-template-columns: 1fr 1fr; }
-  /* CHANGED: use svh/lvh to keep spacer stable on desktop/tablet, too */
+  /* use svh/lvh to keep spacer stable on desktop/tablet, too */
   :root{ --hero-spacer: 58svh; }
 }
 
