@@ -7,6 +7,16 @@
   const year = document.getElementById('year');
   const range = document.getElementById('brightnessRange');
 
+  // Nudge background focus only on Chrome for iOS (CriOS)
+(() => {
+  const ua = navigator.userAgent || '';
+  const isIPhone = /iPhone|iPod/.test(ua);
+  const isChromeOniOS = /CriOS\/\d+/.test(ua);
+  if (isIPhone && isChromeOniOS) {
+    document.documentElement.style.setProperty('--bgx', '62%'); // try 60–68% to taste
+  }
+})();
+
   // Footer year
   if (year) year.textContent = new Date().getFullYear();
 
