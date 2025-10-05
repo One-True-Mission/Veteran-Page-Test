@@ -330,3 +330,12 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   /* Optional: undo the horizontal nudge on tiny screens */
   :root{ --bgx: center; }
 }
+/* Tall-phone portrait: show the ENTIRE image (no cropping) */
+@media (orientation: portrait) and (max-aspect-ratio: 10/16) {
+  .bg{
+    background-color: #0f172a;
+    background-size: contain !important;        /* force zoom-out */
+    background-position: center 46% !important; /* nudge up a touch; try 45–50% */
+  }
+  :root{ --bgx: center !important; }            /* neutralize any horizontal nudge */
+}
