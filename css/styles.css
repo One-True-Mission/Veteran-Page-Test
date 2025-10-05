@@ -6,9 +6,9 @@
   --text: #f3f4f6;
   --muted: #d1d5db;
 
-  --primary: #e11d2b;        /* red button */
+  --primary: #e11d2b;        /* site red */
   --primary-ink: #ffffff;
-  --secondary: #0f172a;      /* black button */
+  --secondary: #0f172a;      /* site black */
   --secondary-ink: #ffffff;
 
   --pad: 18px;
@@ -17,53 +17,34 @@
   --shadow: 0 10px 30px rgba(0,0,0,.35);
 
   /* how far down content starts beneath the hero background */
-  /* CHANGED: use stable viewport units to prevent mobile zoom/jump */
-  --hero-spacer: 52svh;       /* fallback sequence continues in media query */
+  --hero-spacer: 52svh; /* stable viewport units to prevent mobile jump */
 }
 
 /* Base */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; overscroll-behavior-y: none; } /* no global background */
+html, body { height: 100%; margin: 0; overscroll-behavior-y: none; }
 body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
 [hidden]{ display:none !important; }
 
 /* Fixed background — never resizes while scrolling */
 .bg{
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-
-  /* lock the height against URL-bar show/hide behavior */
-  height: 100vh;   /* basic fallback */
-  height: 100svh;  /* small viewport height (no resize with toolbars) */
-  height: 100dvh;  /* dynamic viewport height */
-  height: 100lvh;  /* large viewport height */
-
-  /* CHANGED: split background props + variable X focus so Chrome iOS can nudge */
+  position: fixed; inset: 0; width: 100vw;
+  height: 100vh; height: 100svh; height: 100dvh; height: 100lvh;
   background-image: url('../assets/hero-flag.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: var(--bgx, center) 50%;
-
   filter: brightness(var(--bg-brightness));
-  z-index: -2;                 /* behind everything */
-  transform: translateZ(0);    /* helps iOS keep it crisp */
+  z-index: -2;
+  transform: translateZ(0);
   will-change: transform;
-  contain: layout paint;       /* hints for better perf on some mobiles */
+  contain: layout paint;
 }
 
 /* subtle overlay for readability */
 .shade{
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-
-  /* mirror .bg height locking */
-  height: 100vh;
-  height: 100svh;
-  height: 100dvh;
-  height: 100lvh;
-
+  position: fixed; inset: 0; width: 100vw;
+  height: 100vh; height: 100svh; height: 100dvh; height: 100lvh;
   background: var(--shade);
   z-index: -1;
 }
@@ -82,7 +63,8 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 .theme-bar{
   justify-content: space-between;
   backdrop-filter: blur(6px);
-  background: rgba(0,0,0,.5);      /* 50% transparent black */
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.30);      /* ≈30% opaque */
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .brand{
@@ -101,156 +83,18 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 /* Off-canvas menu */
 .sidemenu{
   position: fixed; inset: 0 auto 0 0; width: 80vw; max-width: 320px;
-  transform: translateX(-100%);
-  transition: transform .25s ease;
-  background: rgba(15,23,42,.96);
-  color: #fff; z-index: 10;
-  box-shadow: var(--shadow);
+  transform: translateX(-100%); transition: transform .25s ease;
+  background: rgba(15,23,42,.96); color: #fff; z-index: 10; box-shadow: var(--shadow);
 }
 .sidemenu.open{ transform: translateX(0); }
 .menu-inner{ display: flex; flex-direction: column; height: 100%; }
-.menu-header{ padding: 20px; border-bottom: 1px solid rgba(255,255,255,.08); }
+.menu-header{ padding: 20px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 14px; }
+
+/* Support button */
 .support-link{
-  display: block;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  letter-spacing:.2px;
-  background: rgba(255,255,255,.06);
-  padding: 10px 12px;
-  border-radius: 8px;
-}
-.menu-links{ display: grid; gap: 10px; padding: 16px 20px; }
-.menu-link{ color: #fff; text-decoration: none; padding: 10px 12px; border-radius: 8px; background: rgba(255,255,255,.06); }
-.menu-link:active{ transform: translateY(1px); }
-.menu-footer{ margin-top: auto; padding: 18px 20px; border-top: 1px solid rgba(255,255,255,.08); }
-.settings-title{ margin: 0 0 10px 0; font-size: 14px; opacity: .9; }
-.slider-label{ display:block; font-size: 12px; opacity: .8; margin-bottom: 4px; }
-#brightnessRange{ width: 100%; }
-
-.backdrop{
-  position: fixed; inset:0; background: rgba(0,0,0,.4); z-index: 8;
-}
-
-/* Content and hero spacer */
-.content{ max-width: var(--maxw); margin: 0 auto; padding: 24px var(--pad) 60px; }
-/* rely on the var we set to svh above (prevents jump/zoom feel) */
-.hero-spacer{ height: var(--hero-spacer); }
-
-/* Buttons */
-.cta{ display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 0 0 40px; }
-.btn{
-  display:inline-block; text-decoration:none; padding: 14px 18px; border-radius: 999px;
-  font-weight: 700; box-shadow: var(--shadow);
-}
-.btn-red{ background: var(--primary); color: var(--primary-ink); }
-.btn-black{ background: var(--secondary); color: var(--secondary-ink); }
-
-/* Video placeholders / About content card */
-.videos{ background: rgba(0,0,0,.60); padding: 18px; border-radius: var(--radius); }  /* was .35 */
-.videos h2{ margin-top: 0; }
-.muted{ color: var(--muted); margin-top: -6px; }
-.video-grid{ display: grid; grid-template-columns: 1fr; gap: 16px; }
-.video-card{ background: rgba(0,0,0,.55); border-radius: var(--radius); padding: 12px; } /* was rgba(255,255,255,.06) */
-.video-card video{ width: 100%; height: 220px; background: rgba(0,0,0,.5); border-radius: 8px; display: block; object-fit: cover; }
-
-/* Footer */
-.footer{
-  text-align:center;
-  margin-top: 40px;
-  color: var(--muted);
-  background: rgba(0,0,0,.5);       /* 50% transparent black */
-  padding-top: 12px;
-  padding-bottom: 12px;
-}
-
-/* Larger screens */
-@media(min-width: 720px){
-  .video-grid{ grid-template-columns: 1fr 1fr; }
-  /* use svh/lvh to keep spacer stable on desktop/tablet, too */
-  :root{ --hero-spacer: 58svh; }
-}
-
-/* ---------- Utilities ---------- */
-.text-center { text-align: center; }
-
-/* Softer, more see-through bubble for the home message (~50% of .9) */
-.videos--soft { background: rgba(0,0,0,.70); }
-
-/* ----- Optional: About page background override -----
-   If you want a different image on about.html, add class="about-page" to
-   the <body> there and uncomment the block below.
-*/
-/*
-.about-page .bg{
-  background-image: url('../assets/hand-shake.jpg');
-  background-position: center;
-}
-*/
-
-/* About page bubble — (commented out the light version to avoid override) */
-/*
-.content-bubble {
-  background: rgba(255, 255, 255, 0.85); 
-  color: #000;
-  padding: 24px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  text-align: left;
-  line-height: 1.6;
-}
-*/
-
-/* About page bubble styled like homepage (active) */
-.content-bubble {
-  background: rgba(0, 0, 0, 0.65); /* medium transparency black */
-  color: #fff;                     /* white text inside */
-  padding: 24px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  line-height: 1.6;
-}
-
-.content-bubble h1,
-.content-bubble h2,
-.content-bubble p,
-.content-bubble strong,
-.content-bubble a {
-  color: #fff; /* ensure all text elements stay white */
-}
-
-/* Emergency notice box */
-.emergency-box {
-  background-color: rgba(255, 140, 0, 0.9); /* strong orange shade */
-  color: #fff;
-  padding: 1rem;
-  margin: 1rem auto;
-  max-width: 700px;
-  text-align: center;
-  border-radius: var(--radius);
-  font-weight: bold;
-  box-shadow: var(--shadow);
-}
-
-/* --- Menu polish: support button, spacing, dropdown --- */
-.menu-header{
-  padding: 20px;
-  border-bottom: 1px solid rgba(255,255,255,.08);
-  margin-bottom: 14px;              /* more space under the support button */
-}
-
-/* Make the support button inviting but not loud */
-.support-link{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-decoration: none;
-  color: #fff;
-  font-weight: 800;
-  letter-spacing: .2px;
-  padding: 12px 14px;
-  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  text-decoration: none; color: #fff; font-weight: 800; letter-spacing: .2px;
+  padding: 12px 14px; border-radius: 10px;
   background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
   border: 1px solid rgba(255,255,255,.12);
   box-shadow: 0 6px 18px rgba(0,0,0,.25);
@@ -258,319 +102,202 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 }
 .support-link:hover{ transform: translateY(-1px); background: rgba(255,255,255,.10); }
 .support-link:active{ transform: translateY(0); }
-
-/* small eyebrow + main line inside support button (optional) */
 .support-eyebrow{ font-size: 11px; text-transform: uppercase; letter-spacing:.12em; opacity:.9; display:block; }
 .support-main{ display:block; font-weight: 800; }
 
-/* Add a bit more breathing room between the three site links */
 .menu-links{ display: grid; gap: 14px; padding: 16px 20px; }
-
-/* Make buttons and links look consistent in the drawer */
 .menu-link,
 .menu-disclosure{
-  display: block;
-  width: 100%;
-  text-align: left;
-  text-decoration: none;
-  color: #fff;
-  background: rgba(255,255,255,.06);
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: none;
-  font: inherit;
-  cursor: pointer;
+  display: block; width: 100%; text-align: left; text-decoration: none; color: #fff;
+  background: rgba(255,255,255,.06); padding: 10px 12px; border-radius: 8px; border: none; font: inherit; cursor: pointer;
 }
-.menu-link:active,
-.menu-disclosure:active{ transform: translateY(1px); }
+.menu-link:active, .menu-disclosure:active{ transform: translateY(1px); }
 
-/* Disclosure caret */
-.menu-disclosure{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.menu-disclosure .chev{
-  transition: transform .15s ease;
-  opacity: .85;
-}
+.menu-disclosure{ display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.menu-disclosure .chev{ transition: transform .15s ease; opacity: .85; }
 .menu-disclosure[aria-expanded="true"] .chev{ transform: rotate(90deg); }
 
-/* Submenu styling */
 .submenu{
-  display: grid;
-  gap: 10px;
-  margin-top: 10px;
-  margin-left: 6px;
-  padding-left: 10px;
+  display: grid; gap: 10px; margin-top: 10px; margin-left: 6px; padding-left: 10px;
   border-left: 1px solid rgba(255,255,255,.10);
 }
 .submenu-link{
-  display: block;
-  text-decoration: none;
-  color: #fff;
-  background: rgba(255,255,255,.04);
-  padding: 9px 12px;
-  border-radius: 8px;
-  font-size: .95em;
+  display: block; text-decoration: none; color: #fff;
+  background: rgba(255,255,255,.04); padding: 9px 12px; border-radius: 8px; font-size: .95em;
 }
 .submenu-link:active{ transform: translateY(1px); }
 
-/* Nudge background focus on small phones so headline stays in-frame */
-@media (max-width: 480px){
-  :root{ --bgx: 62%; }  /* try 60–68% to taste */
+.menu-footer{ margin-top: auto; padding: 18px 20px; border-top: 1px solid rgba(255,255,255,.08); }
+.settings-title{ margin: 0 0 10px 0; font-size: 14px; opacity: .9; }
+.slider-label{ display:block; font-size: 12px; opacity: .8; margin-bottom: 4px; }
+#brightnessRange{ width: 100%; }
+
+.backdrop{ position: fixed; inset:0; background: rgba(0,0,0,.4); z-index: 8; }
+
+/* Content and hero spacer */
+.content{ max-width: var(--maxw); margin: 0 auto; padding: 24px var(--pad) 60px; }
+.hero-spacer{ height: var(--hero-spacer); }
+
+/* Buttons (generic) */
+.cta{ display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 0 0 40px; }
+.btn{ display:inline-block; text-decoration:none; padding: 14px 18px; border-radius: 999px; font-weight: 700; box-shadow: var(--shadow); }
+.btn-red{ background: var(--primary); color: var(--primary-ink); }
+.btn-black{ background: var(--secondary); color: var(--secondary-ink); }
+
+/* Video placeholders / About content card */
+.videos{ background: rgba(0,0,0,.60); padding: 18px; border-radius: var(--radius); }
+.videos h2{ margin-top: 0; }
+.muted{ color: var(--muted); margin-top: -6px; }
+.video-grid{ display: grid; grid-template-columns: 1fr; gap: 16px; }
+.video-card{ background: rgba(0,0,0,.55); border-radius: var(--radius); padding: 12px; }
+.video-card video{ width: 100%; height: 220px; background: rgba(0,0,0,.5); border-radius: 8px; display: block; object-fit: cover; }
+
+/* Footer */
+.footer{
+  text-align:center; margin-top: 40px; color: var(--muted);
+  background: rgba(0,0,0,.5); padding-top: 12px; padding-bottom: 12px;
 }
-/* iPhone-size screens: show the entire image (no cropping) */
+
+/* Larger screens */
+@media(min-width: 720px){
+  .video-grid{ grid-template-columns: 1fr 1fr; }
+  :root{ --hero-spacer: 58svh; }
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.videos--soft { background: rgba(0,0,0,.70); }
+
+/* Background image tweaks on very small/tall phones to show full flag */
+@media (max-width: 480px){
+  :root{ --bgx: 62%; }
+}
 @media (max-width: 480px){
   .bg{
-    background-color: #0f172a;          /* blends any side space */
-    background-size: contain;           /* <-- key change: zooms OUT */
-    background-position: center 50%;    /* keep nicely centered */
+    background-color: #0f172a;
+    background-size: contain;      /* zooms out to show more flag */
+    background-position: center 50%;
   }
-  /* Optional: undo the horizontal nudge on tiny screens */
   :root{ --bgx: center; }
 }
-/* Tall-phone portrait: show the ENTIRE image (no cropping) */
 @media (orientation: portrait) and (max-aspect-ratio: 10/16) {
   .bg{
     background-color: #0f172a;
-    background-size: contain !important;        /* force zoom-out */
-    background-position: center 46% !important; /* nudge up a touch; try 45–50% */
+    background-size: contain !important;
+    background-position: center 46% !important;
   }
-  :root{ --bgx: center !important; }            /* neutralize any horizontal nudge */
-}
-/* --- Header transparency tweak (≈30% opaque / 70% transparent) --- */
-.theme-bar{
-  background: rgba(0, 0, 0, 0.30) !important;  /* was 0.50 */
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-/* ===== Disability page readability & card polish (overrides) ===== */
-
-/* Darken all page cards for stronger contrast */
-.card, .quick-block, .intro-card {
-  background: rgba(8, 10, 16, 0.88);           /* was ~.70–.78; now darker */
-  border: 1px solid rgba(255,255,255,.08);
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(6px) saturate(120%);
+  :root{ --bgx: center !important; }
 }
 
-/* Title & body inside cards */
-.card h1, .card h2, .card h3 { color: var(--text); margin-top: 0; }
-.card p { color: #f1f5f9; }                     /* brighter than normal body */
-.card p.muted { color: var(--muted); }
+/* ============================= */
+/*      DISABILITY PAGE ONLY     */
+/* ============================= */
 
-/* Quick links row (the rounded pill buttons) */
-.quick-links {
-  display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0,1fr));
-  margin-bottom: 16px;
-}
-.quick-links .pill {
-  display: inline-block;
-  padding: 10px 14px; border-radius: 999px;
-  background: rgba(20,26,38,.92);
-  border: 1px solid rgba(255,255,255,.12);
-  color: var(--text); text-align: center; text-decoration: none;
-  box-shadow: 0 6px 18px rgba(0,0,0,.35);
-}
-.quick-links .pill:focus-visible,
-.quick-links .pill:hover { outline: none; border-color: rgba(255,255,255,.28); }
-
-/* ---------- Inner “bubbles” for each resource ---------- */
-/* Outer section keeps the dark glass look */
-.section { margin-top: 18px; }
-
-/* Inner bubble is intentionally DIFFERENT:
-   - solid (no transparency) for max readability
-   - subtle ring + left accent bar to catch the eye
-*/
-.inner {
-  background: #0b1220;                          /* solid, zero transparency */
-  border: 1px solid rgba(255,255,255,.12);
-  border-left: 4px solid var(--primary);        /* brand red accent */
-  border-radius: 12px;
-  padding: 14px 14px 12px;
-  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+.disability-page{
+  --accent-gold: #f4c84b; /* warm gold accent */
 }
 
-/* Link line */
-.inner .res-link {
-  display: inline-flex; align-items: baseline; gap: 10px;
-  font-weight: 700; letter-spacing: .2px; text-decoration: none;
-  color: #ffffff;
-}
-.inner .res-link .badge {
-  font-size: 11px; font-weight: 700; text-transform: uppercase;
-  padding: 2px 6px; border-radius: 6px;
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.16);
-}
-.inner .res-link:hover,
-.inner .res-link:focus-visible { text-decoration: underline; }
-
-/* Small description under the link */
-.inner .res-desc {
-  margin: 8px 0 0;
-  color: #cbd5e1;                                /* brighter than muted */
-  line-height: 1.5;
+/* Show more flag on first load */
+.disability-page .hero-spacer{
+  height: var(--hero-spacer, 52svh);
+  min-height: clamp(60svh, 68svh, 75svh); /* expose more background */
 }
 
-/* Optional list styling inside each inner bubble */
-.inner ul { margin: 8px 0 0 18px; color: #cbd5e1; }
-.inner li { margin: 4px 0; }
-
-/* Section headings */
-.section h3 {
-  margin: 0 0 10px; color: #f8fafc; font-weight: 800;
-}
-
-/* Card spacing helpers */
-.stack { display: grid; gap: 18px; }
-
-/* Responsive tweaks */
-@media (max-width: 720px){
-  .quick-links { grid-template-columns: repeat(2, minmax(0,1fr)); }
-}
-/* ===== Disability page (scoped by .disability-page) ===== */
-
-/* Gold accent just for this page */
-.disability-page {
-  --accent-gold: #f4c84b;   /* warm gold */
-}
-
-/* 1) Start with the flag visible longer */
-.disability-page .hero-spacer {
-  height: var(--hero-spacer, 52svh);            /* uses your variable if set */
-  min-height: clamp(40svh, 52svh, 60svh);       /* show more flag up front */
-}
-
-/* 2) Quick-links look like buttons (clear border + depth) */
-.disability-page .quick-links {
+/* Sticky quick-links with button look */
+.disability-page .quick-links{
   position: sticky; top: 0; z-index: 5;
   backdrop-filter: saturate(120%) blur(6px);
   -webkit-backdrop-filter: saturate(120%) blur(6px);
   background: rgba(5,7,12,.55);
   padding: calc(var(--pad)*0.75) var(--pad);
   border-bottom: 1px solid rgba(255,255,255,.08);
+  display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0,1fr));
 }
-.disability-page .quick-links .pill {
-  display: inline-block;
-  padding: 12px 16px;
-  border-radius: 999px;
+.disability-page .quick-links .pill{
+  display: inline-block; padding: 12px 16px; border-radius: 999px;
   background: rgba(14,18,26,.9);
   border: 2px solid color-mix(in oklab, var(--accent-gold) 70%, white 30%);
   box-shadow: 0 8px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
-  text-decoration: none;
-  font-weight: 700;
+  text-decoration: none; font-weight: 700; color: var(--text); text-align: center;
 }
 .disability-page .quick-links .pill:hover,
-.disability-page .quick-links .pill:focus-visible {
-  border-color: var(--accent-gold);
-  outline: none;
+.disability-page .quick-links .pill:focus-visible{
+  border-color: var(--accent-gold); outline: none;
+}
+@media (max-width: 720px){
+  .disability-page .quick-links{ grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 
-/* 3) Darker outer cards for readability */
-.disability-page .card {
-  background: rgba(8,10,16,.92);
-}
+/* Darker outer cards for readability (scoped) */
+.disability-page .card{ background: rgba(8,10,16,.92); border: 1px solid rgba(255,255,255,.08); box-shadow: var(--shadow); backdrop-filter: blur(6px) saturate(120%); }
+.disability-page .card h1, 
+.disability-page .card h2, 
+.disability-page .card h3 { color: var(--text); margin-top: 0; }
+.disability-page .card p { color: #f1f5f9; }
+.disability-page .card p.muted { color: var(--muted); }
 
-/* 4) Inner resource “bubbles” with GOLD accent + button-like link */
-.disability-page .inner {
-  background: #0b1220;                           /* solid */
-  border: 1px solid rgba(255,255,255,.12);
-  border-left: 4px solid var(--accent-gold);     /* gold trim */
-  border-radius: 14px;
-  padding: 14px;
+/* Inner resource bubbles with gold accent + clickable button link */
+.disability-page .section{ margin-top: 18px; }
+.disability-page .inner{
+  background: #0b1220; border: 1px solid rgba(255,255,255,.12);
+  border-left: 4px solid var(--accent-gold);
+  border-radius: 14px; padding: 14px;
   box-shadow: 0 10px 22px rgba(0,0,0,.35);
 }
-.disability-page .inner .res-link {
-  display: block;                                /* one big clickable area */
-  padding: 12px 14px;
-  border-radius: 12px;
+.disability-page .inner .res-link{
+  display: block; padding: 12px 14px; border-radius: 12px;
   background: rgba(20,25,38,.92);
   border: 2px solid color-mix(in oklab, var(--accent-gold) 70%, white 30%);
-  color: #fff;
-  font-weight: 800;
-  text-decoration: none;
+  color: #fff; font-weight: 800; text-decoration: none;
   box-shadow: 0 8px 20px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
 }
 .disability-page .inner .res-link:hover,
-.disability-page .inner .res-link:focus-visible {
-  border-color: var(--accent-gold);
-  text-decoration: underline;
-  outline: none;
+.disability-page .inner .res-link:focus-visible{
+  border-color: var(--accent-gold); text-decoration: underline; outline: none;
 }
-.disability-page .inner .badge {
-  display: inline-block;
-  font-size: 11px; font-weight: 800; text-transform: uppercase;
-  padding: 2px 6px; border-radius: 6px;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.16);
-  margin-right: 8px;
+.disability-page .inner .badge{
+  display: inline-block; font-size: 11px; font-weight: 800; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 6px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); margin-right: 8px;
 }
-.disability-page .inner .res-desc {
-  margin: 10px 2px 2px;
-  color: #dbe5f1;
-  line-height: 1.55;
+.disability-page .inner .res-desc{ margin: 10px 2px 2px; color: #dbe5f1; line-height: 1.55; }
+
+/* Any plain anchor inside cards still looks clickable */
+.disability-page .card a:not(.pill):not(.res-link){
+  color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px;
 }
 
-/* 5) Make ANY plain anchor inside cards look clickable, too (fallback) */
-.disability-page .card a:not(.pill):not(.res-link) {
-  color: #fff;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* 6) Body text font ONLY on this page (titles untouched) */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+/* Body text font ONLY on this page (titles untouched) */
 .disability-page p,
 .disability-page li,
 .disability-page .res-desc,
 .disability-page small,
-.disability-page .muted {
+.disability-page .muted{
   font-family: "Source Sans 3", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  letter-spacing: .01em;
-  font-weight: 400;
-  color: #e7edf6;
+  letter-spacing: .01em; font-weight: 400; color: #e7edf6;
 }
 
-/* Keep headings as your existing site font/colors */
-/* ===== Disability page final readability polish ===== */
-
-/* 1) Sub-category (<h3>) title color */
-.disability-page h3 {
+/* Sub-category (<h3>) title color (muted gold) */
+.disability-page h3{
   color: color-mix(in oklab, var(--accent-gold) 75%, white 25%);
   font-weight: 700;
 }
 
-/* 2) Main category (<h2>) spacing */
-.disability-page h2 {
-  margin-top: 80px;            /* pushes it lower for cleaner grouping */
-  margin-bottom: 18px;
-  position: relative;
+/* Main category (<h2>) spacing + GOLD divider above each h2 */
+.disability-page h2{
+  margin-top: 84px; margin-bottom: 18px; position: relative;
 }
-
-/* 3) Subtle line between main categories */
-.disability-page h2::before {
-  content: "";
-  position: absolute;
-  top: -40px;                  /* distance above the title */
-  left: 0;
-  width: 100%;
-  height: 1px;
+.disability-page h2::before{
+  content:""; position:absolute; top:-42px; left:0; width:100%; height:2px;
   background: linear-gradient(
     to right,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.08) 30%,
-    rgba(255,255,255,0.08) 70%,
-    rgba(255,255,255,0) 100%
+    rgba(244,200,75,0) 0%,
+    rgba(244,200,75,.22) 25%,
+    rgba(244,200,75,.26) 50%,
+    rgba(244,200,75,.22) 75%,
+    rgba(244,200,75,0) 100%
   );
 }
-
-/* Optional: soften divider on very small screens */
 @media (max-width: 600px){
-  .disability-page h2 { margin-top: 60px; }
-  .disability-page h2::before { top: -30px; }
+  .disability-page h2{ margin-top: 68px; }
+  .disability-page h2::before{ top:-34px; }
 }
