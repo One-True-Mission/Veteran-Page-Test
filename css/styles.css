@@ -82,7 +82,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 .theme-bar{
   justify-content: space-between;
   backdrop-filter: blur(6px);
-  background: rgba(0,0,0,.35);
+  background: rgba(0,0,0,.5);      /* 50% transparent black */
   border-bottom: 1px solid rgba(255,255,255,.08);
 }
 .brand{
@@ -159,7 +159,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   text-align:center;
   margin-top: 40px;
   color: var(--muted);
-  background: rgba(0,0,0,.85);  /* dark footer only */
+  background: rgba(0,0,0,.5);       /* 50% transparent black */
   padding-top: 12px;
   padding-bottom: 12px;
 }
@@ -316,6 +316,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   font-size: .95em;
 }
 .submenu-link:active{ transform: translateY(1px); }
+
 /* Nudge background focus on small phones so headline stays in-frame */
 @media (max-width: 480px){
   :root{ --bgx: 62%; }  /* try 60–68% to taste */
@@ -338,28 +339,4 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
     background-position: center 46% !important; /* nudge up a touch; try 45–50% */
   }
   :root{ --bgx: center !important; }            /* neutralize any horizontal nudge */
-}
-/* --- Header & footer light gold gradient theme --- */
-.topbar,
-footer {
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 215, 100, 0.85) 0%,
-    rgba(255, 225, 130, 0.75) 100%
-  );
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  color: #fff;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-}
-
-/* Header text & icon coloring */
-.topbar .brand-text,
-.topbar .star {
-  color: #fff;
-}
-
-/* Footer text */
-footer {
-  color: #111;
 }
