@@ -340,3 +340,9 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   }
   :root{ --bgx: center !important; }            /* neutralize any horizontal nudge */
 }
+/* --- Header transparency tweak (≈30% opaque / 70% transparent) --- */
+.theme-bar{
+  background: rgba(0, 0, 0, 0.30) !important;  /* was 0.50 */
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
