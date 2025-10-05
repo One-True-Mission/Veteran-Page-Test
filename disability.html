@@ -4,12 +4,68 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Disability • Veteran Support</title>
+  <meta name="description" content="Trusted resources to help veterans with VA disability claims, ratings, appeals, and supportive programs." />
   <link rel="stylesheet" href="css/styles.css" />
+
+  <!-- Scoped styles for sticky quick-links + smooth scroll -->
+  <style>
+    html:focus-within {
+      scroll-behavior: smooth;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html:focus-within {
+        scroll-behavior: auto;
+      }
+    }
+
+    .quick-links {
+      position: sticky;
+      top: 0; /* sits just under your fixed topbar */
+      z-index: 5;
+      backdrop-filter: saturate(120%) blur(6px);
+      -webkit-backdrop-filter: saturate(120%) blur(6px);
+      background: color-mix(in srgb, var(--shade) 40%, transparent);
+      padding: calc(var(--pad) * 0.75) var(--pad);
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .quick-links .wrap {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+    .quick-links .label {
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--muted);
+      margin-right: 4px;
+    }
+    .quick-links a {
+      display: inline-block;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.22);
+      padding: 7px 12px;
+      border-radius: var(--radius);
+      color: var(--text);
+      background: color-mix(in srgb, rgba(0,0,0,.35) 60%, transparent);
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .quick-links a:hover, .quick-links a:focus-visible {
+      outline: none;
+      border-color: rgba(255,255,255,.35);
+      background: color-mix(in srgb, rgba(0,0,0,.45) 70%, transparent);
+    }
+    .content .hero-spacer { margin-bottom: 0; }
+  </style>
 </head>
 <body>
-  <div class="bg" role="img" aria-label="American flag at sunset."></div>
+  <!-- Background (hero-flag.jpg is handled in your CSS) -->
+  <div class="bg" role="img" aria-label="American flag background."></div>
   <div class="shade" aria-hidden="true"></div>
 
+  <!-- Topbar -->
   <header class="topbar theme-bar">
     <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">☰</button>
     <div class="brand">
@@ -19,6 +75,7 @@
     <h1 class="sr-only">Disability • Veteran Support</h1>
   </header>
 
+  <!-- Side menu -->
   <aside id="sidemenu" class="sidemenu" aria-hidden="true">
     <div class="menu-inner">
       <div class="menu-header">
@@ -53,15 +110,148 @@
       </div>
     </div>
   </aside>
-
   <div class="backdrop" hidden></div>
 
+  <!-- Main content -->
   <main class="content">
     <section class="hero-spacer" aria-hidden="true"></section>
-    <section class="videos">
-      <h2>Disability</h2>
-      <p class="muted">Claims, evidence, ratings, and appeals — practical help and trustworthy links coming soon.</p>
+
+    <!-- Sticky quick-links -->
+    <nav class="quick-links" aria-label="Quick section links">
+      <div class="wrap">
+        <span class="label">Quick links:</span>
+        <a href="#apply">Apply</a>
+        <a href="#ratings">Ratings</a>
+        <a href="#appeals">Appeals</a>
+        <a href="#housing">Housing</a>
+        <a href="#vre">VR&amp;E</a>
+        <a href="#crisis">Crisis</a>
+      </div>
+    </nav>
+
+    <!-- Hero intro -->
+    <section>
+      <h2>Disability Resources for Veterans</h2>
+      <p class="muted">
+        Straightforward links and guidance to help you with VA disability claims, ratings, appeals, and programs that support daily life.
+      </p>
     </section>
+
+    <section id="eligibility">
+      <h3>What Counts as a Service-Connected Disability</h3>
+      <p>
+        A condition that was caused or made worse by your military service. Examples include physical injuries, hearing loss, TBI, PTSD, and chronic illnesses.
+      </p>
+      <ul>
+        <li><a href="https://www.va.gov/disability/eligibility/" target="_blank" rel="noopener noreferrer">VA: Eligibility overview</a></li>
+      </ul>
+    </section>
+
+    <section id="apply">
+      <h3>How to Apply for VA Disability Benefits</h3>
+      <ol>
+        <li>Gather service records and medical evidence.</li>
+        <li>File online through <a href="https://www.va.gov/disability/" target="_blank" rel="noopener noreferrer">VA.gov/disability</a> or work with a VSO.</li>
+        <li>Attend any requested C&amp;P exam.</li>
+        <li>Track your claim and review your decision letter.</li>
+      </ol>
+      <ul>
+        <li><a href="https://www.va.gov/find-forms/about-form-21-526ez/" target="_blank" rel="noopener noreferrer">VA Form 21-526EZ (Apply for Disability Compensation)</a></li>
+        <li><a href="https://www.va.gov/claim-or-appeal-status/" target="_blank" rel="noopener noreferrer">Check claim or appeal status</a></li>
+        <li><a href="https://www.ebenefits.va.gov/" target="_blank" rel="noopener noreferrer">eBenefits (VA/DoD portal)</a></li>
+      </ul>
+    </section>
+
+    <section id="ratings">
+      <h3>Understanding Ratings &amp; Compensation</h3>
+      <p>
+        VA assigns a disability rating from 0–100% (in 10% steps). Multiple conditions can be combined into a single rating.
+      </p>
+      <ul>
+        <li><a href="https://www.va.gov/disability/compensation-rates/veteran-rates/" target="_blank" rel="noopener noreferrer">VA: Current compensation rates</a></li>
+      </ul>
+    </section>
+
+    <section id="appeals">
+      <h3>If You Disagree with a Decision</h3>
+      <p>
+        You can request a Higher-Level Review, submit a Supplemental Claim with new evidence, or appeal to the Board of Veterans’ Appeals.
+      </p>
+      <ul>
+        <li><a href="https://www.va.gov/decision-reviews/" target="_blank" rel="noopener noreferrer">VA: Decision reviews &amp; appeals</a></li>
+      </ul>
+    </section>
+
+    <section id="housing">
+      <h3>Adapted Housing &amp; Accessibility</h3>
+      <ul>
+        <li><a href="https://www.va.gov/housing-assistance/disability/" target="_blank" rel="noopener noreferrer">Adapted Housing Grants (home modifications)</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Vehicle Allowance &amp; Adaptive Equipment</h3>
+      <ul>
+        <li><a href="https://www.va.gov/disability/eligibility/special-claims/automobile/" target="_blank" rel="noopener noreferrer">Automobile allowance &amp; adaptive equipment</a></li>
+      </ul>
+    </section>
+
+    <section id="vre">
+      <h3>VR&amp;E (Vocational Rehabilitation &amp; Employment)</h3>
+      <ul>
+        <li><a href="https://www.va.gov/careers-employment/vocational-rehabilitation/" target="_blank" rel="noopener noreferrer">VR&amp;E overview</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Employment &amp; Training</h3>
+      <ul>
+        <li><a href="https://www.dol.gov/agencies/vets/disabled-veterans" target="_blank" rel="noopener noreferrer">U.S. Department of Labor VETS: Disabled Veterans</a></li>
+      </ul>
+    </section>
+
+    <section id="state">
+      <h3>State-Level Claims Help</h3>
+      <p class="muted">
+        Every state has a veterans agency that can help you file or appeal. If you’re in Texas:
+      </p>
+      <ul>
+        <li><a href="https://tvc.texas.gov/claims/compensation/" target="_blank" rel="noopener noreferrer">Texas Veterans Commission – Claims &amp; Compensation</a></li>
+      </ul>
+    </section>
+
+    <section id="ssa">
+      <h3>Social Security and Other Benefits</h3>
+      <p>
+        VA disability and Social Security Disability are separate programs. You may be eligible for both.
+      </p>
+      <ul>
+        <li><a href="https://www.ssa.gov/people/veterans/" target="_blank" rel="noopener noreferrer">SSA: Information for Veterans</a></li>
+      </ul>
+    </section>
+
+    <section id="directory">
+      <h3>Resource Directory</h3>
+      <ul>
+        <li><a href="https://nrd.gov/" target="_blank" rel="noopener noreferrer">National Resource Directory (interagency)</a></li>
+        <li><a href="https://www.ebenefits.va.gov/" target="_blank" rel="noopener noreferrer">eBenefits (manage benefits &amp; documents)</a></li>
+        <li><a href="https://www.militaryonesource.mil/military-basics/wounded-ill-injured-and-caregivers/va-benefits-for-disabled-veterans-and-service-members/" target="_blank" rel="noopener noreferrer">Military OneSource: VA benefits overview</a></li>
+      </ul>
+    </section>
+
+    <section id="crisis" aria-labelledby="crisis-title">
+      <h3 id="crisis-title">If You Need Help Now</h3>
+      <p>
+        📞 Dial <strong>988</strong> then press <strong>1</strong> (Veterans Crisis Line) • 💬 Text <strong>838255</strong> • 🌐
+        <a href="https://www.veteranscrisisline.net" target="_blank" rel="noopener noreferrer">veteranscrisisline.net</a>
+      </p>
+    </section>
+
+    <section>
+      <h3>Success Stories (Coming Soon)</h3>
+      <p class="muted">We’ll feature brief stories and videos of veterans who navigated the process and what helped them most.</p>
+    </section>
+
     <footer class="footer">
       <small>&copy; <span id="year"></span> Veteran Support</small>
     </footer>
