@@ -8,16 +8,16 @@
   const range = document.getElementById('brightnessRange');
 
   // --- Lock background to visual viewport height (fixes zoom/scroll jump) ---
-(function lockVisualViewportHeight(){
-  const setVH = () => {
-    const vh = (window.visualViewport?.height || window.innerHeight);
-    document.documentElement.style.setProperty('--vh', vh + 'px');
-  };
-  setVH();
-  window.addEventListener('resize', setVH, { passive: true });
-  window.visualViewport?.addEventListener('resize', setVH, { passive: true });
-  window.visualViewport?.addEventListener('scroll', setVH, { passive: true });
-})();
+  (function lockVisualViewportHeight(){
+    const setVH = () => {
+      const vh = (window.visualViewport?.height || window.innerHeight);
+      document.documentElement.style.setProperty('--vh', vh + 'px');
+    };
+    setVH();
+    window.addEventListener('resize', setVH, { passive: true });
+    window.visualViewport?.addEventListener('resize', setVH, { passive: true });
+    window.visualViewport?.addEventListener('scroll', setVH, { passive: true });
+  })();
 
   // Footer year
   if (year) year.textContent = new Date().getFullYear();
@@ -67,7 +67,7 @@
   }
 
   // ----- iOS anti-zoom shim for the fixed background -----
-  // Keeps .bg crisp during momentum scroll
+  // Keeps .bg crisp during momentum scroll (works alongside the --vh fix above)
   let ticking = false;
   window.addEventListener('scroll', () => {
     if (ticking) return;
@@ -83,6 +83,7 @@
     });
   }, { passive: true });
 })();
+
 // --- Resources dropdown (drawer submenu) ---
 (function () {
   const disclosures = document.querySelectorAll('.menu-disclosure');
