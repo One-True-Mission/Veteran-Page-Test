@@ -7,9 +7,11 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
+  <!-- Fixed background -->
   <div class="bg" role="img" aria-label="American flag at sunset."></div>
   <div class="shade" aria-hidden="true"></div>
 
+  <!-- Header -->
   <header class="topbar theme-bar">
     <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">☰</button>
     <div class="brand">
@@ -19,6 +21,7 @@
     <h1 class="sr-only">Education • Veteran Support</h1>
   </header>
 
+  <!-- Drawer menu -->
   <aside id="sidemenu" class="sidemenu" aria-hidden="true">
     <div class="menu-inner">
       <div class="menu-header">
@@ -31,10 +34,12 @@
       <nav class="menu-links" aria-label="Primary">
         <a href="index.html" class="menu-link">Home</a>
 
+        <!-- Keep Resources open on this page -->
         <button class="menu-disclosure" type="button" aria-expanded="true" aria-controls="resources-submenu">
           Resources &amp; Testimonials
           <span class="chev" aria-hidden="true">▸</span>
         </button>
+
         <div id="resources-submenu" class="submenu">
           <a href="education.html" class="submenu-link" aria-current="page">Education</a>
           <a href="disability.html" class="submenu-link">Disability</a>
@@ -54,14 +59,93 @@
     </div>
   </aside>
 
+  <!-- Backdrop -->
   <div class="backdrop" hidden></div>
 
   <main class="content">
+    <!-- show more of the flag first -->
     <section class="hero-spacer" aria-hidden="true"></section>
+
+    <!-- Intro -->
     <section class="videos">
       <h2>Education</h2>
-      <p class="muted">GI Bill, scholarships, training programs, and school selection guidance — coming soon.</p>
+      <p class="muted">
+        Use the tools below to find GI Bill®–approved programs, compare schools, and explore
+        apprenticeship options. All links open in a new tab.
+      </p>
+
+      <div class="video-grid">
+        <!-- GI Bill Comparison Tool -->
+        <article class="video-card">
+          <h3 class="video-title">GI Bill® Comparison Tool (VA.gov)</h3>
+          <p class="video-desc">
+            Check if a school or training program is GI Bill–approved, estimate monthly housing/book
+            payments, and review cautionary flags.
+          </p>
+          <p style="margin-top:10px;">
+            <a class="btn btn-red" href="https://www.va.gov/gi-bill-comparison-tool/" target="_blank" rel="noopener noreferrer">
+              Open Comparison Tool
+            </a>
+          </p>
+        </article>
+
+        <!-- Yellow Ribbon -->
+        <article class="video-card">
+          <h3 class="video-title">Yellow Ribbon School Finder (VA.gov)</h3>
+          <p class="video-desc">
+            Search schools that offer Yellow Ribbon funding to help cover tuition costs that exceed
+            the Post-9/11 GI Bill cap.
+          </p>
+          <p style="margin-top:10px;">
+            <a class="btn btn-black" href="https://www.va.gov/education/yellow-ribbon-participating-schools/" target="_blank" rel="noopener noreferrer">
+              Find Yellow Ribbon Schools
+            </a>
+          </p>
+        </article>
+
+        <!-- Apprenticeship / OJT -->
+        <article class="video-card">
+          <h3 class="video-title">Use GI Bill for Apprenticeships &amp; OJT (VA.gov)</h3>
+          <p class="video-desc">
+            Learn how to apply benefits to paid <em>earn-while-you-learn</em> programs, including monthly
+            housing and books/supplies stipends.
+          </p>
+          <p style="margin-top:10px;">
+            <a class="btn btn-black" href="https://www.va.gov/education/about-gi-bill-benefits/how-to-use-benefits/apprenticeship-ojt/" target="_blank" rel="noopener noreferrer">
+              See Apprenticeship Options
+            </a>
+          </p>
+        </article>
+
+        <!-- College Navigator -->
+        <article class="video-card">
+          <h3 class="video-title">College Navigator (U.S. Dept. of Education)</h3>
+          <p class="video-desc">
+            Neutral, ad-free school search with data on programs, costs, outcomes, accreditation, and more.
+            Great for side-by-side comparisons.
+          </p>
+          <p style="margin-top:10px;">
+            <a class="btn btn-black" href="https://nces.ed.gov/collegenavigator/" target="_blank" rel="noopener noreferrer">
+              Compare Schools
+            </a>
+          </p>
+        </article>
+
+        <!-- Federal Student Aid -->
+        <article class="video-card">
+          <h3 class="video-title">Federal Student Aid for Military Families</h3>
+          <p class="video-desc">
+            FAFSA, grants/loans, and borrower protections that can complement VA benefits for you and your family.
+          </p>
+          <p style="margin-top:10px;">
+            <a class="btn btn-black" href="https://studentaid.gov/resources/military" target="_blank" rel="noopener noreferrer">
+              Explore Federal Aid
+            </a>
+          </p>
+        </article>
+      </div>
     </section>
+
     <footer class="footer">
       <small>&copy; <span id="year"></span> Veteran Support</small>
     </footer>
