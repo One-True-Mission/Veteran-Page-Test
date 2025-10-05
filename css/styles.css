@@ -537,3 +537,40 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 }
 
 /* Keep headings as your existing site font/colors */
+/* ===== Disability page final readability polish ===== */
+
+/* 1) Sub-category (<h3>) title color */
+.disability-page h3 {
+  color: color-mix(in oklab, var(--accent-gold) 75%, white 25%);
+  font-weight: 700;
+}
+
+/* 2) Main category (<h2>) spacing */
+.disability-page h2 {
+  margin-top: 80px;            /* pushes it lower for cleaner grouping */
+  margin-bottom: 18px;
+  position: relative;
+}
+
+/* 3) Subtle line between main categories */
+.disability-page h2::before {
+  content: "";
+  position: absolute;
+  top: -40px;                  /* distance above the title */
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.08) 30%,
+    rgba(255,255,255,0.08) 70%,
+    rgba(255,255,255,0) 100%
+  );
+}
+
+/* Optional: soften divider on very small screens */
+@media (max-width: 600px){
+  .disability-page h2 { margin-top: 60px; }
+  .disability-page h2::before { top: -30px; }
+}
