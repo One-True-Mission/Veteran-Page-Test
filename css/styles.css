@@ -320,3 +320,13 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 @media (max-width: 480px){
   :root{ --bgx: 62%; }  /* try 60–68% to taste */
 }
+/* iPhone-size screens: show the entire image (no cropping) */
+@media (max-width: 480px){
+  .bg{
+    background-color: #0f172a;          /* blends any side space */
+    background-size: contain;           /* <-- key change: zooms OUT */
+    background-position: center 50%;    /* keep nicely centered */
+  }
+  /* Optional: undo the horizontal nudge on tiny screens */
+  :root{ --bgx: center; }
+}
