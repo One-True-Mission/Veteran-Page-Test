@@ -346,3 +346,89 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
+/* ===== Disability page readability & card polish (overrides) ===== */
+
+/* Darken all page cards for stronger contrast */
+.card, .quick-block, .intro-card {
+  background: rgba(8, 10, 16, 0.88);           /* was ~.70–.78; now darker */
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Title & body inside cards */
+.card h1, .card h2, .card h3 { color: var(--text); margin-top: 0; }
+.card p { color: #f1f5f9; }                     /* brighter than normal body */
+.card p.muted { color: var(--muted); }
+
+/* Quick links row (the rounded pill buttons) */
+.quick-links {
+  display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0,1fr));
+  margin-bottom: 16px;
+}
+.quick-links .pill {
+  display: inline-block;
+  padding: 10px 14px; border-radius: 999px;
+  background: rgba(20,26,38,.92);
+  border: 1px solid rgba(255,255,255,.12);
+  color: var(--text); text-align: center; text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,.35);
+}
+.quick-links .pill:focus-visible,
+.quick-links .pill:hover { outline: none; border-color: rgba(255,255,255,.28); }
+
+/* ---------- Inner “bubbles” for each resource ---------- */
+/* Outer section keeps the dark glass look */
+.section { margin-top: 18px; }
+
+/* Inner bubble is intentionally DIFFERENT:
+   - solid (no transparency) for max readability
+   - subtle ring + left accent bar to catch the eye
+*/
+.inner {
+  background: #0b1220;                          /* solid, zero transparency */
+  border: 1px solid rgba(255,255,255,.12);
+  border-left: 4px solid var(--primary);        /* brand red accent */
+  border-radius: 12px;
+  padding: 14px 14px 12px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+
+/* Link line */
+.inner .res-link {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  font-weight: 700; letter-spacing: .2px; text-decoration: none;
+  color: #ffffff;
+}
+.inner .res-link .badge {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 6px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.16);
+}
+.inner .res-link:hover,
+.inner .res-link:focus-visible { text-decoration: underline; }
+
+/* Small description under the link */
+.inner .res-desc {
+  margin: 8px 0 0;
+  color: #cbd5e1;                                /* brighter than muted */
+  line-height: 1.5;
+}
+
+/* Optional list styling inside each inner bubble */
+.inner ul { margin: 8px 0 0 18px; color: #cbd5e1; }
+.inner li { margin: 4px 0; }
+
+/* Section headings */
+.section h3 {
+  margin: 0 0 10px; color: #f8fafc; font-weight: 800;
+}
+
+/* Card spacing helpers */
+.stack { display: grid; gap: 18px; }
+
+/* Responsive tweaks */
+@media (max-width: 720px){
+  .quick-links { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
