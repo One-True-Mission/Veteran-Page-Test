@@ -6,6 +6,8 @@
   <title>Disability • Veteran Support</title>
   <meta name="description" content="Trusted resources to help veterans with VA disability claims, ratings, appeals, and supportive programs." />
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- Load body font used only on this page -->
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <script defer src="js/app.js"></script>
 </head>
 <body class="disability-page">
@@ -65,22 +67,24 @@
     <!-- Show the flag first -->
     <section class="hero-spacer" aria-hidden="true"></section>
 
-    <!-- Quick links -->
+    <!-- Intro FIRST (title + description) -->
     <section class="card intro-card">
-      <div class="quick-links">
-        <a class="pill" href="#apply">Apply</a>
-        <a class="pill" href="#ratings">Ratings</a>
-        <a class="pill" href="#appeals">Appeals</a>
-        <a class="pill" href="#housing">Housing</a>
-        <a class="pill" href="#vre">VR&amp;E</a>
-        <a class="pill" href="#crisis">Crisis</a>
-      </div>
-
       <h1>Disability Resources for Veterans</h1>
       <p class="muted">
-        Everything below is an official government resource (VA, DoD, DOL, SSA, or state). Each item includes a short description so you know exactly what you’ll find when you click.
+        Everything below is an official government resource (VA, DoD, DOL, SSA, or state).
+        Each item includes a short description so you know exactly what you’ll find when you click.
       </p>
     </section>
+
+    <!-- Sticky quick-links BELOW the intro -->
+    <nav class="quick-links" aria-label="Quick section links">
+      <a class="pill" href="#apply">Apply</a>
+      <a class="pill" href="#ratings">Ratings</a>
+      <a class="pill" href="#appeals">Appeals</a>
+      <a class="pill" href="#housing">Housing</a>
+      <a class="pill" href="#vre">VR&amp;E</a>
+      <a class="pill" href="#crisis">Crisis</a>
+    </nav>
 
     <!-- Eligibility & Applying -->
     <section id="apply" class="card stack">
@@ -202,7 +206,7 @@
       </div>
     </section>
 
-    <!-- Directory / extras -->
+    <!-- Directories / extras -->
     <section class="card stack">
       <h2>Directories &amp; Other Benefits</h2>
 
