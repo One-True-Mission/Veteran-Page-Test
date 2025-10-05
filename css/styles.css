@@ -175,7 +175,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 .text-center { text-align: center; }
 
 /* Softer, more see-through bubble for the home message (~50% of .9) */
-.videos--soft { background: rgba(0,0,0,.45); }
+.videos--soft { background: rgba(0,0,0,.70); }
 
 /* ----- Optional: About page background override -----
    If you want a different image on about.html, add class="about-page" to
