@@ -432,3 +432,108 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
 @media (max-width: 720px){
   .quick-links { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
+/* ===== Disability page (scoped by .disability-page) ===== */
+
+/* Gold accent just for this page */
+.disability-page {
+  --accent-gold: #f4c84b;   /* warm gold */
+}
+
+/* 1) Start with the flag visible longer */
+.disability-page .hero-spacer {
+  height: var(--hero-spacer, 52svh);            /* uses your variable if set */
+  min-height: clamp(40svh, 52svh, 60svh);       /* show more flag up front */
+}
+
+/* 2) Quick-links look like buttons (clear border + depth) */
+.disability-page .quick-links {
+  position: sticky; top: 0; z-index: 5;
+  backdrop-filter: saturate(120%) blur(6px);
+  -webkit-backdrop-filter: saturate(120%) blur(6px);
+  background: rgba(5,7,12,.55);
+  padding: calc(var(--pad)*0.75) var(--pad);
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.disability-page .quick-links .pill {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(14,18,26,.9);
+  border: 2px solid color-mix(in oklab, var(--accent-gold) 70%, white 30%);
+  box-shadow: 0 8px 22px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+  text-decoration: none;
+  font-weight: 700;
+}
+.disability-page .quick-links .pill:hover,
+.disability-page .quick-links .pill:focus-visible {
+  border-color: var(--accent-gold);
+  outline: none;
+}
+
+/* 3) Darker outer cards for readability */
+.disability-page .card {
+  background: rgba(8,10,16,.92);
+}
+
+/* 4) Inner resource “bubbles” with GOLD accent + button-like link */
+.disability-page .inner {
+  background: #0b1220;                           /* solid */
+  border: 1px solid rgba(255,255,255,.12);
+  border-left: 4px solid var(--accent-gold);     /* gold trim */
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+.disability-page .inner .res-link {
+  display: block;                                /* one big clickable area */
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(20,25,38,.92);
+  border: 2px solid color-mix(in oklab, var(--accent-gold) 70%, white 30%);
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.disability-page .inner .res-link:hover,
+.disability-page .inner .res-link:focus-visible {
+  border-color: var(--accent-gold);
+  text-decoration: underline;
+  outline: none;
+}
+.disability-page .inner .badge {
+  display: inline-block;
+  font-size: 11px; font-weight: 800; text-transform: uppercase;
+  padding: 2px 6px; border-radius: 6px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.16);
+  margin-right: 8px;
+}
+.disability-page .inner .res-desc {
+  margin: 10px 2px 2px;
+  color: #dbe5f1;
+  line-height: 1.55;
+}
+
+/* 5) Make ANY plain anchor inside cards look clickable, too (fallback) */
+.disability-page .card a:not(.pill):not(.res-link) {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 6) Body text font ONLY on this page (titles untouched) */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&display=swap');
+.disability-page p,
+.disability-page li,
+.disability-page .res-desc,
+.disability-page small,
+.disability-page .muted {
+  font-family: "Source Sans 3", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: .01em;
+  font-weight: 400;
+  color: #e7edf6;
+}
+
+/* Keep headings as your existing site font/colors */
