@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Healthcare • Veteran Support</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="bg" role="img" aria-label="American flag at sunset."></div>
+  <div class="shade" aria-hidden="true"></div>
+
+  <header class="topbar theme-bar">
+    <button class="hamburger" aria-label="Open menu" aria-controls="sidemenu" aria-expanded="false">☰</button>
+    <div class="brand">
+      <span class="star" aria-hidden="true">★</span>
+      <span class="brand-text">Veteran Support</span>
+    </div>
+    <h1 class="sr-only">Healthcare • Veteran Support</h1>
+  </header>
+
+  <aside id="sidemenu" class="sidemenu" aria-hidden="true">
+    <div class="menu-inner">
+      <div class="menu-header">
+        <a class="support-link" href="https://1x2f63-7u.myshopify.com" target="_blank" rel="noopener noreferrer">
+          <span class="support-eyebrow">One True Mission</span>
+          <span class="support-main">Click-to-support</span>
+        </a>
+      </div>
+
+      <nav class="menu-links" aria-label="Primary">
+        <a href="index.html" class="menu-link">Home</a>
+
+        <button class="menu-disclosure" type="button" aria-expanded="true" aria-controls="resources-submenu">
+          Resources &amp; Testimonials
+          <span class="chev" aria-hidden="true">▸</span>
+        </button>
+        <div id="resources-submenu" class="submenu">
+          <a href="education.html" class="submenu-link">Education</a>
+          <a href="disability.html" class="submenu-link">Disability</a>
+          <a href="home-ownership.html" class="submenu-link">Home Ownership</a>
+          <a href="healthcare.html" class="submenu-link" aria-current="page">Healthcare</a>
+          <a href="resources.html" class="submenu-link">Video Guides</a>
+        </div>
+
+        <a href="about.html" class="menu-link">About</a>
+      </nav>
+
+      <div class="menu-footer">
+        <h2 class="settings-title">Settings</h2>
+        <label class="slider-label" for="brightnessRange">Background Brightness</label>
+        <input id="brightnessRange" type="range" min="50" max="110" value="80" />
+      </div>
+    </div>
+  </aside>
+
+  <div class="backdrop" hidden></div>
+
+  <main class="content">
+    <section class="hero-spacer" aria-hidden="true"></section>
+    <section class="videos">
+      <h2>Healthcare</h2>
+      <p class="muted">Enrollment, eligibility, and how to use VA and community care — content coming soon.</p>
+    </section>
+    <footer class="footer">
+      <small>&copy; <span id="year"></span> Veteran Support</small>
+    </footer>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
