@@ -316,3 +316,7 @@ body { color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Robo
   font-size: .95em;
 }
 .submenu-link:active{ transform: translateY(1px); }
+/* Nudge background focus on small phones so headline stays in-frame */
+@media (max-width: 480px){
+  :root{ --bgx: 62%; }  /* try 60–68% to taste */
+}
